@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Zap, Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 const ComicNavbarInteractive = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -89,10 +90,10 @@ const ComicNavbarInteractive = () => {
             </button>
 
             {/* Login Button - Pill shaped, cleaner shadow */}
-            <button className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 border-2 border-black rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-bold text-sm tracking-wide hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px] transition-all">
+            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 border-2 border-black rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-bold text-sm tracking-wide hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px] transition-all">
               <User className="w-4 h-4" />
               Login
-            </button>
+            </Link>
           </div>
 
           {/* --- MOBILE HAMBURGER --- */}
