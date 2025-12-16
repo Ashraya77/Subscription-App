@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Zap, Menu, X } from 'lucide-react';
-import Link from 'next/link';
+import { motion } from 'framer-motion'; // <-- Framer Motion Import
 
 const ComicNavbarInteractive = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,13 +16,18 @@ const ComicNavbarInteractive = () => {
   ];
 
   return (
-    // MAIN BACKGROUND
-    <div className="w-full bg-yellow-400 p-6 font-sans select-none relative">
+    // MAIN CONTAINER: Now STICKY, full width, and uses the yellow background.
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className="sticky top-0 w-full z-50 font-sans select-none bg-yellow-400 py-4" // Switched from fixed to sticky and added yellow background
+    >
       
-      {/* Background Dot Pattern */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      {/* Background Dot Pattern (This will now stick with the yellow header) */}
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
 
-      {/* NAVBAR CONTAINER */}
+      {/* NAVBAR CONTAINER: The white comic strip box is centered within the sticky yellow area */}
       <nav className="max-w-7xl mx-auto bg-white border-3 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] rounded-2xl px-6 py-4 relative z-20">
         
         <div className="flex items-center justify-between">
@@ -38,7 +43,6 @@ const ComicNavbarInteractive = () => {
           </div>
 
           {/* --- INTERACTIVE NAV ITEMS --- */}
-          {/* This section handles the hover logic you requested */}
           <div className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <a 
@@ -81,19 +85,27 @@ const ComicNavbarInteractive = () => {
           {/* --- ACTION BUTTONS (Separated and Open) --- */}
           <div className="hidden md:flex items-center gap-6">
             
-            {/* Cart Icon Only - clean look */}
-            <button className="relative group">
+            {/* Cart Icon Only - Framer Motion Enhanced */}
+            <motion.button 
+                whileHover={{ scale: 1.15, rotate: 10 }} // Pop and spin effect
+                whileTap={{ scale: 0.9, rotate: 0 }}
+                className="relative group transition-transform"
+            >
               <ShoppingCart className="w-7 h-7 text-black group-hover:text-yellow-600 transition-colors" />
               <span className="absolute -top-2 -right-2 bg-black text-white w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold border-2 border-white">
                 3
               </span>
-            </button>
+            </motion.button>
 
-            {/* Login Button - Pill shaped, cleaner shadow */}
-            <Link href="/login" className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 border-2 border-black rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-bold text-sm tracking-wide hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px] transition-all">
+            {/* Login Button - Framer Motion Enhanced */}
+            <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)' }} // Shadow grows slightly
+                whileTap={{ scale: 0.95, boxShadow: '1px 1px 0px 0px rgba(0,0,0,1)', x: 2, y: 2 }} // Button press effect
+                className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 border-2 border-black rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-bold text-sm tracking-wide transition-all"
+            >
               <User className="w-4 h-4" />
               Login
-            </Link>
+            </motion.button>
           </div>
 
           {/* --- MOBILE HAMBURGER --- */}
@@ -118,7 +130,7 @@ const ComicNavbarInteractive = () => {
           </div>
         )}
       </nav>
-    </div>
+    </motion.header>
   );
 };
 
