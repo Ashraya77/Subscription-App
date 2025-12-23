@@ -127,6 +127,16 @@ const ComicNavbarInteractive = () => {
                   {item.name}
                 </a>
               ))}
+
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)' }} // Shadow grows slightly
+                whileTap={{ scale: 0.95, boxShadow: '1px 1px 0px 0px rgba(0,0,0,1)', x: 2, y: 2 }} // Button press effect
+                className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 border-2 border-black rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-bold text-sm tracking-wide transition-all"
+            >
+              <User className="w-4 h-4" />
+              Login
+            </motion.button>
+              
           </div>
         )}
       </nav>
